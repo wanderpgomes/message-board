@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-public class MessageBoardControllerTest {
+public class MessageBoardRestControllerTest {
 
     private MockMvc mvc;
 
