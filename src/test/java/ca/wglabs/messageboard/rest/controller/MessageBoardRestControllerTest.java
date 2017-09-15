@@ -28,17 +28,17 @@ public class MessageBoardRestControllerTest {
     }
 
     @Test
-    public void testEcho() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/echo")
-                .param("msg", "Test For Echo")
+    public void testAddMessage() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/messages")
+                .content("{text: Hi}")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("Test For Echo")));
+                .andExpect(content().string(equalTo("{text: Hi}")));
     }
 
     @Test
     public void testInvalidUrl() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/invalid")
+        mvc.perform(MockMvcRequestBuilders.post("/invalid")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
