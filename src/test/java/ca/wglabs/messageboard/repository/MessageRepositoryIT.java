@@ -3,6 +3,7 @@ package ca.wglabs.messageboard.repository;
 import ca.wglabs.messageboard.config.DataSourceConfiguration;
 import ca.wglabs.messageboard.config.PersistenceConfiguration;
 import ca.wglabs.messageboard.model.Message;
+import ca.wglabs.messageboard.tdf.MessageTDF;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,9 +23,10 @@ public class MessageRepositoryIT {
     @Autowired
     protected MessageRepository messageRepository;
 
+
     @Test
     public void testSaveMessage() {
-        Message message = createMessage("hello!");
+        Message message = MessageTDF.createMessage("hello!");
 
         Message result = messageRepository.save(message);
 
@@ -41,12 +43,6 @@ public class MessageRepositoryIT {
     @Before
     public void setUp() {
         messageRepository.deleteAll();
-    }
-
-    private Message createMessage(String text) {
-        Message message =  new Message();
-        message.setText(text);
-        return message;
     }
 
 }

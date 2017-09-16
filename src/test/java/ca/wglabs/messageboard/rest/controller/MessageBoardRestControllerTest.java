@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -28,12 +29,10 @@ public class MessageBoardRestControllerTest {
     }
 
     @Test
-    public void testAddMessage() throws Exception {
+    public void testAddMessage_badRequest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/messages")
-                .content("{text: Hi}")
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("{text: Hi}")));
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -41,5 +40,13 @@ public class MessageBoardRestControllerTest {
         mvc.perform(MockMvcRequestBuilders.post("/invalid")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void testPing() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/ping")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("Ping:")));
     }
 }
