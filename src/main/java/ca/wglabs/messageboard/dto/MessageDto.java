@@ -1,6 +1,5 @@
 package ca.wglabs.messageboard.dto;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 public class MessageDto {

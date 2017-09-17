@@ -11,6 +11,7 @@ public class Message {
     private Long id;
     private String text;
     private Calendar createDate;
+    private Long userId;
 
 
     @Id
@@ -41,5 +42,14 @@ public class Message {
 
     public void setCreateDate(Calendar createDate) {
         this.createDate = createDate;
+    }
+
+    @Column(name = "user_id")
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
