@@ -1,5 +1,7 @@
 package ca.wglabs.messageboard.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 
 public class MessageDto {
@@ -25,6 +27,7 @@ public class MessageDto {
         this.text = text;
     }
 
+    @JsonFormat(pattern="dd/MM/yyyy hh:mm")
     public LocalDateTime getCreateDate() {
         return createDate;
     }
