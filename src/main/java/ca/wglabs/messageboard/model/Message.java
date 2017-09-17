@@ -2,6 +2,7 @@ package ca.wglabs.messageboard.model;
 
 
 import javax.persistence.*;
+import java.util.Calendar;
 
 @Entity
 @Table(name="message")
@@ -9,6 +10,7 @@ public class Message {
 
     private Long id;
     private String text;
+    private Calendar createDate;
 
 
     @Id
@@ -29,5 +31,15 @@ public class Message {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_date")
+    public Calendar getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Calendar createDate) {
+        this.createDate = createDate;
     }
 }
