@@ -2,12 +2,9 @@ package ca.wglabs.messageboard.repository;
 
 import ca.wglabs.messageboard.config.DataSourceConfiguration;
 import ca.wglabs.messageboard.config.PersistenceConfiguration;
-import ca.wglabs.messageboard.model.Message;
 import ca.wglabs.messageboard.model.User;
-import ca.wglabs.messageboard.tdf.MessageTDF;
 import ca.wglabs.messageboard.tdf.UserTDF;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

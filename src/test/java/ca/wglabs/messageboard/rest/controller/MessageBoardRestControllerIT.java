@@ -2,6 +2,7 @@ package ca.wglabs.messageboard.rest.controller;
 
 
 import ca.wglabs.messageboard.dto.MessageDto;
+import ca.wglabs.messageboard.repository.MessageRepository;
 import ca.wglabs.messageboard.tdf.MessageTDF;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -21,6 +25,9 @@ public class MessageBoardRestControllerIT {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
+    @Autowired
+    private MessageRepository messageRepository;
 
 
     @Test
@@ -35,5 +42,22 @@ public class MessageBoardRestControllerIT {
         ResponseEntity<MessageDto> response = restTemplate.postForEntity("/messages", message, MessageDto.class);
 
         assertThat(response.getBody().getText(), equalTo("Hello!"));
+    }
+
+    @Test
+    public void testGetMessages() throws Exception {
+        messageRepository.deleteAll();
+        MessageDto message1 = MessageTDF.createMessageDto("Hello!");
+        restTemplate.postForEntity("/messages", message1, MessageDto.class);
+        MessageDto message2 = MessageTDF.createMessageDto("Hello!");
+        restTemplate.postForEntity("/messages", message2, MessageDto.class);
+
+        // TODO: Use a dedicated test database so we can delete all messages.
+        ResponseEntity<MessageDto[]> responseEntity = restTemplate.getForEntity("/messages", MessageDto[].class);
+        List<MessageDto> response = Arrays.asList(responseEntity.getBody());
+
+        assertThat(response.size(), equalTo(2));
+        assertThat(response.get(0).getText(), equalTo("Hello!"));
+        assertThat(response.get(1).getText(), equalTo("Hello!"));
     }
 }

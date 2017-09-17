@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class MessageBoardService {
@@ -17,6 +20,7 @@ public class MessageBoardService {
 
     @Autowired
     private MessageRepository messageRepository;
+
 
     public MessageDto createMessage(MessageDto messageDto){
 
@@ -27,4 +31,16 @@ public class MessageBoardService {
 
         return message.map(MessageConverter::toDto).get();
     }
+
+
+    public List<MessageDto> getMessages() {
+
+        Iterable<Message> messages = messageRepository.findAllByOrderByIdAsc();
+
+        return StreamSupport.stream(messages.spliterator(), false)
+                .map(MessageConverter::toDto)
+                .collect(Collectors.toList());
+    }
+
+
 }
