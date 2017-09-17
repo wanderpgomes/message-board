@@ -1,6 +1,7 @@
 package ca.wglabs.messageboard.rest.controller;
 
 import ca.wglabs.messageboard.dto.MessageDto;
+import ca.wglabs.messageboard.dto.UserDto;
 import ca.wglabs.messageboard.service.MessageBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +27,15 @@ public class MessageBoardRestController {
         return messageBoardService.getMessages();
     }
 
+    @GetMapping("/users")
+    public List<UserDto> getAllUsers() {
+        return messageBoardService.getUsers();
+    }
+
     @GetMapping("/ping")
     public String ping(){
         return "Ping: " + new Date();
     }
+
+
 }
