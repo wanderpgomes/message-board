@@ -2,8 +2,10 @@ package ca.wglabs.messageboard.service;
 
 
 import ca.wglabs.messageboard.dto.MessageDto;
+import ca.wglabs.messageboard.dto.UserDto;
 import ca.wglabs.messageboard.model.Message;
 import ca.wglabs.messageboard.repository.MessageRepository;
+import ca.wglabs.messageboard.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,9 @@ public class MessageBoardService {
 
     @Autowired
     private MessageRepository messageRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
 
     public MessageDto createMessage(MessageDto messageDto){
@@ -43,4 +48,9 @@ public class MessageBoardService {
     }
 
 
+    public List<UserDto> getUsers() {
+        return userRepository.findAllByOrderByIdAsc().stream()
+                .map(UserConverter::toDto)
+                .collect(Collectors.toList());
+    }
 }

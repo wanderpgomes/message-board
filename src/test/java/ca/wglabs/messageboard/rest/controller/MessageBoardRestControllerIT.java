@@ -2,6 +2,7 @@ package ca.wglabs.messageboard.rest.controller;
 
 
 import ca.wglabs.messageboard.dto.MessageDto;
+import ca.wglabs.messageboard.dto.UserDto;
 import ca.wglabs.messageboard.repository.MessageRepository;
 import ca.wglabs.messageboard.tdf.MessageTDF;
 import org.junit.Test;
@@ -59,5 +60,16 @@ public class MessageBoardRestControllerIT {
         assertThat(response.size(), equalTo(2));
         assertThat(response.get(0).getText(), equalTo("Hello!"));
         assertThat(response.get(1).getText(), equalTo("Hello!"));
+    }
+
+    @Test
+    public void testGetUsers() throws  Exception {
+
+        ResponseEntity<UserDto[]> responseEntity = restTemplate.getForEntity("/users", UserDto[].class);
+        List<UserDto> response = Arrays.asList(responseEntity.getBody());
+
+        assertThat(response.size(), equalTo(4));
+        assertThat(response.get(0).getName(), equalTo("James"));
+
     }
 }
