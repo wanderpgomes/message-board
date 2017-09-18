@@ -16,8 +16,7 @@ public class MessageConverter {
     public static Message toEntity(MessageDto messageDto){
         Message message = new Message();
         message.setText(messageDto.getText());
-        message.setUserId(messageDto.getUserId());
-
+        message.setUserId((messageDto.getUserId() != null) ? Long.valueOf(messageDto.getUserId()) : null);
         ZonedDateTime zdt = ZonedDateTime.of(messageDto.getCreateDate(), ZoneOffset.UTC);
         Calendar calendar = GregorianCalendar.from(zdt);
         message.setCreateDate(calendar);
