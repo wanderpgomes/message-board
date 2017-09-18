@@ -10,7 +10,7 @@ public class MessageDto {
     private String id;
     private String text;
     private LocalDateTime createDate;
-    private Long userId;
+    private String userId;
 
 
     public String getId() {
@@ -40,11 +40,11 @@ public class MessageDto {
     }
 
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 }
