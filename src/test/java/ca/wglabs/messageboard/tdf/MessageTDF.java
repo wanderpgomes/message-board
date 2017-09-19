@@ -3,7 +3,8 @@ package ca.wglabs.messageboard.tdf;
 import ca.wglabs.messageboard.dto.MessageDto;
 import ca.wglabs.messageboard.model.Message;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +32,7 @@ public class MessageTDF {
 
     public static MessageDto createMessageDto(String text) {
         MessageDto messageDto =  new MessageDto();
-        messageDto.setCreateDate(LocalDateTime.now());
+        messageDto.setCreateDate(Date.from(Instant.now()));
         messageDto.setText(text);
         return messageDto;
     }

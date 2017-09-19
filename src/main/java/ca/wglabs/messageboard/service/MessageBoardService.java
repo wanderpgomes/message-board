@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,7 +30,7 @@ public class MessageBoardService {
 
     public MessageDto createMessage(MessageDto messageDto){
 
-        messageDto.setCreateDate(ZonedDateTime.now(ZoneOffset.UTC).toLocalDateTime());
+        messageDto.setCreateDate(Date.from(ZonedDateTime.now(ZoneOffset.UTC).toInstant()));
         Optional<Message> message = Optional.of(messageDto).map(MessageConverter::toEntity);
 
         messageRepository.save(message.get());

@@ -17,8 +17,9 @@ public class MessageConverter {
         Message message = new Message();
         message.setText(messageDto.getText());
         message.setUserId((messageDto.getUserId() != null) ? Long.valueOf(messageDto.getUserId()) : null);
-        ZonedDateTime zdt = ZonedDateTime.of(messageDto.getCreateDate(), ZoneOffset.UTC);
-        Calendar calendar = GregorianCalendar.from(zdt);
+
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(messageDto.getCreateDate());
         message.setCreateDate(calendar);
 
         return message;
@@ -27,8 +28,8 @@ public class MessageConverter {
     public static MessageDto toDto(Message message){
         MessageDto messageDto = new MessageDto();
         messageDto.setId(Objects.toString(message.getId(), ""));
-        LocalDateTime ldt = LocalDateTime.ofInstant(message.getCreateDate().toInstant(), ZoneId.systemDefault());
-        messageDto.setCreateDate(ldt);
+
+        messageDto.setCreateDate(message.getCreateDate().getTime());
         messageDto.setText(message.getText());
 
         return messageDto;

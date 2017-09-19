@@ -1,15 +1,12 @@
 package ca.wglabs.messageboard.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class MessageDto {
 
     private String id;
     private String text;
-    private LocalDateTime createDate;
+    private Date createDate;
     private String userId;
 
 
@@ -29,13 +26,11 @@ public class MessageDto {
         this.text = text;
     }
 
-    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    //@JsonFormat(pattern="dd/MM/yyyy hh:mm:ss")
-    public LocalDateTime getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
