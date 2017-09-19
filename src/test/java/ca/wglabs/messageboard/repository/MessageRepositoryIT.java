@@ -24,6 +24,7 @@ public class MessageRepositoryIT {
     protected MessageRepository messageRepository;
 
     private static final String TEST_MESSAGE = "test message";
+    private static final Long USER_ID = 1L;
 
 
     @Test
@@ -34,6 +35,18 @@ public class MessageRepositoryIT {
 
         assertNotNull(result.getId());
         assertEquals(message.getText(), result.getText());
+    }
+
+    @Test
+    public void testSaveMessageResponse() {
+        Message originalMessage = MessageTDF.createMessage(TEST_MESSAGE, USER_ID);
+        Message response = MessageTDF.createMessageResponse(TEST_MESSAGE, USER_ID, originalMessage.getId());
+
+        Message result = messageRepository.save(response);
+
+        assertNotNull(result.getId());
+        assertEquals(response.getText(), result.getText());
+        assertEquals(response.getOriginalMessageId(), result.getOriginalMessageId());
     }
 
     @Test

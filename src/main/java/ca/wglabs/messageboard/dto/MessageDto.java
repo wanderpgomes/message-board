@@ -8,7 +8,7 @@ public class MessageDto {
     private String text;
     private Date createDate;
     private Long userId;
-
+    private Long originalMessageId;
 
     public Long getId() {
         return id;
@@ -41,5 +41,13 @@ public class MessageDto {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Long getOriginalMessageId() {
+        return originalMessageId;
+    }
+
+    public void setOriginalMessageId(Long originalMessageId) {
+        this.originalMessageId = originalMessageId;
     }
 }

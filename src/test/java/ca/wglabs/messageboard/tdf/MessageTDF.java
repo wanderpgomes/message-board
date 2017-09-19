@@ -24,6 +24,12 @@ public class MessageTDF {
         return message;
     }
 
+    public static Message createMessageResponse(String text, Long userId, Long originalMEssageId) {
+        Message message = createMessage(text, userId);
+        message.setOriginalMessageId(originalMEssageId);
+        return message;
+    }
+
     public static List<Message> createMessage(List<String> messages) {
         return messages.stream()
                 .map(MessageTDF::createMessage)

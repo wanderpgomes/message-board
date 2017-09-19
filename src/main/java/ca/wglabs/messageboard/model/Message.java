@@ -12,6 +12,7 @@ public class Message {
     private String text;
     private Calendar createDate;
     private Long userId;
+    private Long originalMessageId;
 
 
     @Id
@@ -51,5 +52,14 @@ public class Message {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    @Column(name = "original_message_id")
+    public Long getOriginalMessageId() {
+        return originalMessageId;
+    }
+
+    public void setOriginalMessageId(Long originalMessageId) {
+        this.originalMessageId = originalMessageId;
     }
 }
