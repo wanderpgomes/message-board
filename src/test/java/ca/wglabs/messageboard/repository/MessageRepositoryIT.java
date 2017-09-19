@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -34,9 +36,26 @@ public class MessageRepositoryIT {
         assertEquals(message.getText(), result.getText());
     }
 
+    @Test
+    public void testFindMessageByUser() {
+        Long userId = 1L;
+        Message message = MessageTDF.createMessage(TEST_MESSAGE, userId);
+        messageRepository.save(message);
+
+        List<Message> result = messageRepository.findByUserId(userId);
+
+        assertEquals(1, result.size());
+        assertEquals(TEST_MESSAGE, result.get(0).getText());
+    }
+
+    @Before
+    public void setUp() {
+        messageRepository.deleteAll();
+    }
+
     @After
     public void tearDown() {
-        messageRepository.deleteByText(TEST_MESSAGE);
+        messageRepository.deleteAll();
     }
 
 

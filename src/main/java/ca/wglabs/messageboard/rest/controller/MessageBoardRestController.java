@@ -23,8 +23,8 @@ public class MessageBoardRestController {
     }
 
     @GetMapping("/messages")
-    public List<MessageDto> getAllMessages() {
-        return messageBoardService.getMessages();
+    public List<MessageDto> getMessages(@RequestParam(required = false) Long userId) {
+        return messageBoardService.getMessages(userId);
     }
 
     @GetMapping("/users")

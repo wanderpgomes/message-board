@@ -48,4 +48,31 @@ public class MessageBoardServiceTest {
         assertEquals("Hi there!", actual.get(1).getText());
     }
 
+    @Test
+    public void testGetMessagesByUser() {
+        Long userId = 1L;
+        Message message1 = MessageTDF.createMessage("Hello!", userId);
+        Message message2 = MessageTDF.createMessage("Hi there!", userId);
+
+        when(messageRepository.findByUserId(userId)).thenReturn(Arrays.asList(message1, message2));
+
+        List<MessageDto> actual = fixture.getMessages(userId);
+
+        assertEquals(2, actual.size());
+        assertEquals("Hello!", actual.get(0).getText());
+        assertEquals("Hi there!", actual.get(1).getText());
+    }
+
+    @Test
+    public void testGetMessagesByUserWithNoUser() {
+        List<Message> messages = MessageTDF.createMessage(Arrays.asList("Hello!", "Hi there!"));
+
+        when(messageRepository.findAllByOrderByIdAsc()).thenReturn(messages);
+
+        List<MessageDto> actual = fixture.getMessages(null);
+
+        assertEquals("Hello!", actual.get(0).getText());
+        assertEquals("Hi there!", actual.get(1).getText());
+    }
+
 }

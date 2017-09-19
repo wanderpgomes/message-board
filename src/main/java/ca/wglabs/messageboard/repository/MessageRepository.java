@@ -4,10 +4,14 @@ import ca.wglabs.messageboard.model.Message;
 import org.springframework.data.repository.CrudRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 public interface MessageRepository extends CrudRepository<Message, Long> {
 
-    Iterable<Message> findAllByOrderByIdAsc();
+    List<Message> findAllByOrderByIdAsc();
+
+    List<Message> findByUserId(Long userId);
+
 
     @Transactional
     Long deleteByText(String text);

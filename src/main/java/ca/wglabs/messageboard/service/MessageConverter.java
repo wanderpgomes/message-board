@@ -17,7 +17,6 @@ public class MessageConverter {
         Message message = new Message();
         message.setText(messageDto.getText());
         message.setUserId((messageDto.getUserId() != null) ? Long.valueOf(messageDto.getUserId()) : null);
-
         Calendar calendar = GregorianCalendar.getInstance();
         calendar.setTime(messageDto.getCreateDate());
         message.setCreateDate(calendar);
@@ -27,8 +26,8 @@ public class MessageConverter {
 
     public static MessageDto toDto(Message message){
         MessageDto messageDto = new MessageDto();
-        messageDto.setId(Objects.toString(message.getId(), ""));
-
+        messageDto.setId(message.getId());
+        messageDto.setUserId(message.getUserId());
         messageDto.setCreateDate(message.getCreateDate().getTime());
         messageDto.setText(message.getText());
 

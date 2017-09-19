@@ -15,7 +15,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 public class MessageBoardService {
@@ -40,14 +39,18 @@ public class MessageBoardService {
 
 
     public List<MessageDto> getMessages() {
-
-        Iterable<Message> messages = messageRepository.findAllByOrderByIdAsc();
-
-        return StreamSupport.stream(messages.spliterator(), false)
+        return messageRepository.findAllByOrderByIdAsc().stream()
                 .map(MessageConverter::toDto)
                 .collect(Collectors.toList());
     }
 
+    public List<MessageDto> getMessages(Long userId) {
+        if (userId != null) {
+            return messageRepository.findByUserId(userId).stream()
+                    .map(MessageConverter::toDto)
+                    .collect(Collectors.toList());
+        } else return getMessages();
+    }
 
     public List<UserDto> getUsers() {
         return userRepository.findAllByOrderByIdAsc().stream()

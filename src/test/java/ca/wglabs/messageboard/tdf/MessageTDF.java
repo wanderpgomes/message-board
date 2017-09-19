@@ -31,8 +31,13 @@ public class MessageTDF {
     }
 
     public static MessageDto createMessageDto(String text) {
+        return createMessageDto(text, null);
+    }
+
+    public static MessageDto createMessageDto(String text, Long userId) {
         MessageDto messageDto =  new MessageDto();
         messageDto.setCreateDate(Date.from(Instant.now()));
+        messageDto.setUserId(userId);
         messageDto.setText(text);
         return messageDto;
     }
@@ -42,6 +47,4 @@ public class MessageTDF {
                 .map(MessageTDF::createMessageDto)
                 .collect(Collectors.toList());
     }
-
-
 }

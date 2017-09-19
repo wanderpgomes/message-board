@@ -67,6 +67,22 @@ public class MessageBoardRestControllerIT {
     }
 
     @Test
+    public void testGetMessagesByUser() throws Exception {
+
+        MessageDto message1 = MessageTDF.createMessageDto(MESSAGE, 1L);
+        restTemplate.postForEntity("/messages", message1, MessageDto.class);
+        MessageDto message2 = MessageTDF.createMessageDto(MESSAGE, 2L);
+        restTemplate.postForEntity("/messages", message2, MessageDto.class);
+
+        // TODO: Use a dedicated test database so we can delete all messages.
+        ResponseEntity<MessageDto[]> responseEntity = restTemplate.getForEntity("/messages?userId=1", MessageDto[].class);
+        List<MessageDto> response = Arrays.asList(responseEntity.getBody());
+
+        assertThat(response.size(), equalTo(1));
+        assertThat(response.get(0).getText(), equalTo(MESSAGE));
+    }
+
+    @Test
     public void testGetUsers() throws  Exception {
 
         ResponseEntity<UserDto[]> responseEntity = restTemplate.getForEntity("/users", UserDto[].class);

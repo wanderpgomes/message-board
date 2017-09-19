@@ -4,17 +4,17 @@ import java.util.Date;
 
 public class MessageDto {
 
-    private String id;
+    private Long id;
     private String text;
     private Date createDate;
-    private String userId;
+    private Long userId;
 
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -35,11 +35,11 @@ public class MessageDto {
     }
 
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 }
