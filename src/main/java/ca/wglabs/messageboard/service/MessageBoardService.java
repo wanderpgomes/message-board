@@ -39,14 +39,14 @@ public class MessageBoardService {
 
 
     public List<MessageDto> getMessages() {
-        return messageRepository.findAllByOrderByIdAsc().stream()
+        return messageRepository.findAllByAndOriginalMessageIdIsNull().stream()
                 .map(MessageConverter::toDto)
                 .collect(Collectors.toList());
     }
 
     public List<MessageDto> getMessages(Long userId) {
         if (userId != null) {
-            return messageRepository.findByUserId(userId).stream()
+            return messageRepository.findByUserIdAndOriginalMessageIdIsNull(userId).stream()
                     .map(MessageConverter::toDto)
                     .collect(Collectors.toList());
         } else return getMessages();

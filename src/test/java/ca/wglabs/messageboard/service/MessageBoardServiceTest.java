@@ -40,7 +40,7 @@ public class MessageBoardServiceTest {
     public void testGetMessages() {
         List<Message> messages = MessageTDF.createMessage(Arrays.asList("Hello!", "Hi there!"));
 
-        when(messageRepository.findAllByOrderByIdAsc()).thenReturn(messages);
+        when(messageRepository.findAllByAndOriginalMessageIdIsNull()).thenReturn(messages);
 
         List<MessageDto> actual = fixture.getMessages();
 
@@ -54,7 +54,7 @@ public class MessageBoardServiceTest {
         Message message1 = MessageTDF.createMessage("Hello!", userId);
         Message message2 = MessageTDF.createMessage("Hi there!", userId);
 
-        when(messageRepository.findByUserId(userId)).thenReturn(Arrays.asList(message1, message2));
+        when(messageRepository.findByUserIdAndOriginalMessageIdIsNull(userId)).thenReturn(Arrays.asList(message1, message2));
 
         List<MessageDto> actual = fixture.getMessages(userId);
 
@@ -67,7 +67,7 @@ public class MessageBoardServiceTest {
     public void testGetMessagesByUserWithNoUser() {
         List<Message> messages = MessageTDF.createMessage(Arrays.asList("Hello!", "Hi there!"));
 
-        when(messageRepository.findAllByOrderByIdAsc()).thenReturn(messages);
+        when(messageRepository.findAllByAndOriginalMessageIdIsNull()).thenReturn(messages);
 
         List<MessageDto> actual = fixture.getMessages(null);
 

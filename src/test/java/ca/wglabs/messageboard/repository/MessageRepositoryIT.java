@@ -55,7 +55,7 @@ public class MessageRepositoryIT {
         Message message = MessageTDF.createMessage(TEST_MESSAGE, userId);
         messageRepository.save(message);
 
-        List<Message> result = messageRepository.findByUserId(userId);
+        List<Message> result = messageRepository.findByUserIdAndOriginalMessageIdIsNull(userId);
 
         assertEquals(1, result.size());
         assertEquals(TEST_MESSAGE, result.get(0).getText());
