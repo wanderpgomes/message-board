@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface MessageRepository extends CrudRepository<Message, Long> {
 
-    List<Message> findAllByOrderByIdAsc();
+    List<Message> findAllByAndOriginalMessageIdIsNull();
 
-    List<Message> findByUserId(Long userId);
+    List<Message> findByUserIdAndOriginalMessageIdIsNull(Long userId);
 
 
     @Transactional
