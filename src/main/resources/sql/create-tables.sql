@@ -1,6 +1,10 @@
 create table message (
 	id int AUTO_INCREMENT primary key,
 	text varchar(255) not null,
+	city varchar(50),
+	temperature decimal(5, 2),
+	latitude decimal(10, 8),
+	longitude decimal(11, 8),
 	create_date datetime not null,
 	original_message_id int,
 	user_id int

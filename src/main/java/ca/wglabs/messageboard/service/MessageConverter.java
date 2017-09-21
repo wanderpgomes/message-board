@@ -18,6 +18,10 @@ public class MessageConverter {
         message.setText(messageDto.getText());
         message.setUserId(messageDto.getUserId());
         message.setOriginalMessageId(messageDto.getOriginalMessageId());
+        message.setCity(messageDto.getCity());
+        message.setTemperature(messageDto.getTemperature());
+        message.setLatitude(messageDto.getLatitude());
+        message.setLongitude(messageDto.getLongitude());
 
         Calendar calendar = GregorianCalendar.getInstance();
         calendar.setTime(messageDto.getCreateDate());
@@ -32,6 +36,10 @@ public class MessageConverter {
         messageDto.setUserId(message.getUserId());
         messageDto.setOriginalMessageId(message.getOriginalMessageId());
         messageDto.setCreateDate(message.getCreateDate().getTime());
+        messageDto.setCity(message.getCity());
+        messageDto.setTemperature(message.getTemperature());
+        messageDto.setLatitude(message.getLatitude());
+        messageDto.setLongitude(message.getLongitude());
         messageDto.setText(message.getText());
 
         return messageDto;

@@ -43,10 +43,11 @@ public class MessageBoardRestControllerIT {
 
     @Test
     public void testAddMessage() throws Exception {
-        MessageDto message = MessageTDF.createMessageDto(MESSAGE);
+        MessageDto message = MessageTDF.createMessageDto(MESSAGE, 1L, "Toronto", 20.0d, 43.7d, -79.42d);
         ResponseEntity<MessageDto> response = restTemplate.postForEntity("/messages", message, MessageDto.class);
 
         assertThat(response.getBody().getText(), equalTo(MESSAGE));
+        assertThat(response.getBody().getCity(), equalTo("Toronto"));
     }
 
     @Test

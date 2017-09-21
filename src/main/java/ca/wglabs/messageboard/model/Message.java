@@ -13,6 +13,10 @@ public class Message {
     private Calendar createDate;
     private Long userId;
     private Long originalMessageId;
+    private String city;
+    private Double latitude;
+    private Double longitude;
+    private Double temperature;
 
 
     @Id
@@ -61,5 +65,41 @@ public class Message {
 
     public void setOriginalMessageId(Long originalMessageId) {
         this.originalMessageId = originalMessageId;
+    }
+
+    @Column(name = "city")
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    @Column(name = "latitude")
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    @Column(name = "longitude")
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    @Column(name = "temperature")
+    public Double getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(Double temperature) {
+        this.temperature = temperature;
     }
 }

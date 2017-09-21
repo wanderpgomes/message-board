@@ -29,7 +29,7 @@ public class MessageRepositoryIT {
 
     @Test
     public void testSaveMessage() {
-        Message message = MessageTDF.createMessage(TEST_MESSAGE);
+        Message message = MessageTDF.createMessage(TEST_MESSAGE, USER_ID, "Toronto", 20.1d, 43.7d, -79.42d);
 
         Message result = messageRepository.save(message);
 
