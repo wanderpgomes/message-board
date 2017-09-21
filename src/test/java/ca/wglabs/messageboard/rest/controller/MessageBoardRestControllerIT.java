@@ -82,6 +82,22 @@ public class MessageBoardRestControllerIT {
         assertThat(response.get(0).getText(), equalTo(MESSAGE));
     }
 
+
+    @Test
+    public void testGetResponses() throws Exception {
+
+        MessageDto message = MessageTDF.createMessageDto(MESSAGE, 1L);
+        ResponseEntity<MessageDto> rsp = restTemplate.postForEntity("/messages", message, MessageDto.class);
+        MessageDto messageResponse = MessageTDF.createMessageResponseDto(MESSAGE, 2L, rsp.getBody().getId());
+        restTemplate.postForEntity("/messages", messageResponse, MessageDto.class);
+
+        ResponseEntity<MessageDto[]> responseEntity = restTemplate.getForEntity("/responses?originalMessageId="+rsp.getBody().getId(), MessageDto[].class);
+        List<MessageDto> response = Arrays.asList(responseEntity.getBody());
+
+        assertThat(response.size(), equalTo(1));
+        assertThat(response.get(0).getText(), equalTo(MESSAGE));
+    }
+
     @Test
     public void testGetUsers() throws  Exception {
 
@@ -95,11 +111,13 @@ public class MessageBoardRestControllerIT {
 
     @Before
     public void setUp() {
+        messageRepository.deleteByOriginalMessageIdIsNotNull();
         messageRepository.deleteAll();
     }
 
     @After
     public void tearDown() {
+        messageRepository.deleteByOriginalMessageIdIsNotNull();
         messageRepository.deleteAll();
     }
 }

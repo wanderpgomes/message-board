@@ -28,7 +28,6 @@ public class MessageBoardService {
 
 
     public MessageDto createMessage(MessageDto messageDto){
-
         messageDto.setCreateDate(Date.from(ZonedDateTime.now(ZoneOffset.UTC).toInstant()));
         Optional<Message> message = Optional.of(messageDto).map(MessageConverter::toEntity);
 
@@ -36,7 +35,6 @@ public class MessageBoardService {
 
         return message.map(MessageConverter::toDto).get();
     }
-
 
     public List<MessageDto> getMessages() {
         return messageRepository.findAllByAndOriginalMessageIdIsNull().stream()
@@ -52,9 +50,16 @@ public class MessageBoardService {
         } else return getMessages();
     }
 
+    public List<MessageDto> getResponses(Long originalMessageId) {
+        return messageRepository.findByOriginalMessageId(originalMessageId).stream()
+                .map(MessageConverter::toDto)
+                .collect(Collectors.toList());
+    }
+
     public List<UserDto> getUsers() {
         return userRepository.findAllByOrderByIdAsc().stream()
                 .map(UserConverter::toDto)
                 .collect(Collectors.toList());
     }
+
 }

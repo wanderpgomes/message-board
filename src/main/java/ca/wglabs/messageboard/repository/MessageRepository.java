@@ -12,8 +12,12 @@ public interface MessageRepository extends CrudRepository<Message, Long> {
 
     List<Message> findByUserIdAndOriginalMessageIdIsNull(Long userId);
 
+    List<Message> findByOriginalMessageId(Long originalMessageId);
 
     @Transactional
-    Long deleteByText(String text);
+    void deleteByText(String text);
+
+    @Transactional
+    void deleteByOriginalMessageIdIsNotNull();
 
 }

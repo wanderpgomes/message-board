@@ -24,9 +24,9 @@ public class MessageTDF {
         return message;
     }
 
-    public static Message createMessageResponse(String text, Long userId, Long originalMEssageId) {
+    public static Message createMessageResponse(String text, Long userId, Long originalMessageId) {
         Message message = createMessage(text, userId);
-        message.setOriginalMessageId(originalMEssageId);
+        message.setOriginalMessageId(originalMessageId);
         return message;
     }
 
@@ -38,6 +38,12 @@ public class MessageTDF {
 
     public static MessageDto createMessageDto(String text) {
         return createMessageDto(text, null);
+    }
+
+    public static MessageDto createMessageResponseDto(String text, Long userId, Long originalMessageId) {
+        MessageDto messageDto = createMessageDto(text, userId);
+        messageDto.setOriginalMessageId(originalMessageId);
+        return messageDto;
     }
 
     public static MessageDto createMessageDto(String text, Long userId) {

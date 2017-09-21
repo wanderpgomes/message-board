@@ -61,13 +61,29 @@ public class MessageRepositoryIT {
         assertEquals(TEST_MESSAGE, result.get(0).getText());
     }
 
+    @Test
+    public void testFindMessageByOriginalMessageId() {
+        Message message = MessageTDF.createMessage(TEST_MESSAGE, null);
+        messageRepository.save(message);
+        Message response = MessageTDF.createMessageResponse(TEST_MESSAGE, null, message.getId());
+        messageRepository.save(response);
+
+        List<Message> result = messageRepository.findByOriginalMessageId(message.getId());
+
+        assertEquals(1, result.size());
+        assertEquals(TEST_MESSAGE, result.get(0).getText());
+        assertEquals(message.getId(), result.get(0).getOriginalMessageId());
+    }
+
     @Before
     public void setUp() {
+        messageRepository.deleteByOriginalMessageIdIsNotNull();
         messageRepository.deleteAll();
     }
 
     @After
     public void tearDown() {
+        messageRepository.deleteByOriginalMessageIdIsNotNull();
         messageRepository.deleteAll();
     }
 

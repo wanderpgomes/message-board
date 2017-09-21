@@ -75,4 +75,18 @@ public class MessageBoardServiceTest {
         assertEquals("Hi there!", actual.get(1).getText());
     }
 
+    @Test
+    public void testGetResponses() {
+        Long originalMessageId = 1L;
+        Message response = MessageTDF.createMessageResponse("Hello!", null, originalMessageId);
+
+        when(messageRepository.findByOriginalMessageId(originalMessageId)).thenReturn(Arrays.asList(response));
+
+        List<MessageDto> actual = fixture.getResponses(originalMessageId);
+
+        assertEquals(1, actual.size());
+        assertEquals("Hello!", actual.get(0).getText());
+        assertEquals(originalMessageId, actual.get(0).getOriginalMessageId());
+    }
+
 }

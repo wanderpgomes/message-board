@@ -27,6 +27,11 @@ public class MessageBoardRestController {
         return messageBoardService.getMessages(userId);
     }
 
+    @GetMapping
+    public List<MessageDto> getResponses(@RequestParam Long originalMessageId) {
+        return messageBoardService.getResponses(originalMessageId);
+    }
+
     @GetMapping("/users")
     public List<UserDto> getAllUsers() {
         return messageBoardService.getUsers();
