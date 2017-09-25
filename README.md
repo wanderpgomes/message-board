@@ -5,8 +5,8 @@ This is the backend component of the Message Board Application. The frontend por
 ### SetUp 
 
 1. Clone git repository: `git clone https://github.com/wanderpgomes/message-board.git`
-2. Create database main schema: `CREATE SCHEMA 'messageborad'`
-3. Create database test schema: `CREATE SCHEMA 'messageborad_test'`
+2. Create database main schema: `create schema 'messageborad'`
+3. Create database test schema: `create schema 'messageborad_test'`
 4. Run `create-tables.sql` and `seed-users.sql` on both schemas.
 5. Run the maven build: `mvn clean install`
   
