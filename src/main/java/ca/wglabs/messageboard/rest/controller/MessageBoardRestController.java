@@ -3,6 +3,7 @@ package ca.wglabs.messageboard.rest.controller;
 import ca.wglabs.messageboard.dto.MessageDto;
 import ca.wglabs.messageboard.dto.UserDto;
 import ca.wglabs.messageboard.service.MessageBoardService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "https://localhost:9000")
+@Api(value="message-board-controller", description="Operations pertaining to messages on the Message Board Application")
 public class MessageBoardRestController {
 
 
@@ -27,7 +29,7 @@ public class MessageBoardRestController {
         return messageBoardService.getMessages(userId);
     }
 
-    @GetMapping
+    @GetMapping("/responses")
     public List<MessageDto> getResponses(@RequestParam Long originalMessageId) {
         return messageBoardService.getResponses(originalMessageId);
     }

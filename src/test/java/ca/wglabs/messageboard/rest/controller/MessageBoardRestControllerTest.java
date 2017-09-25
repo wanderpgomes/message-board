@@ -39,7 +39,7 @@ public class MessageBoardRestControllerTest {
     public void testInvalidUrl() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/invalid")
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isMethodNotAllowed());
+                .andExpect(status().isNotFound());
     }
 
     @Test
